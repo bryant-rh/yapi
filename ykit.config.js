@@ -188,6 +188,14 @@ module.exports = {
           include: [path.resolve(__dirname, './node_modules/swagger-client')],
           loader: 'babel-loader'
         });
+        //如果不想把第三方库打包到bundle中，就用externals解决
+        baseConfig.externals= { 
+          fs: require('fs'),
+          net: require('net'),
+          dns: require('dns'),
+          tls: require('tls'),
+          child_process: require('child_process'),
+        } ;
 
         baseConfig.module.preLoaders.push({
           test: /\.json$/,
